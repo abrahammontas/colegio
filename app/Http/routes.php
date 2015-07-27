@@ -14,3 +14,25 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('inicio', 'HomeController');
+
+Route::resource('estudiantes', 'EstudiantesController');
+
+Route::resource('docentes', 'DocentesController');
+
+Route::resource('estudiantes', 'EstudiantesController');
+
+Route::resource('tipodocentes', 'TipoDocenteController');
+
+Route::resource('notas', 'NotasController');
+
+Route::resource('niveles', 'NivelesController');
+
+Route::resource('cursos', 'CursosController');
+
+Route::resource('comentarios', 'ComentariosController');
+
+Route::resource('materias', 'MateriasController');
+
