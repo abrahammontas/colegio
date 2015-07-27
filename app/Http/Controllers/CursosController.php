@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Cursos;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,10 @@ class CursosController extends Controller
      */
     public function index()
     {
+        
         //
+        $cursos = Cursos::all();
+        return view('Cursos.listar', ['cursos' => $cursos]);
     }
 
     /**

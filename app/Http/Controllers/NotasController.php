@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Notas;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,10 @@ class NotasController extends Controller
      */
     public function index()
     {
+        
         //
+        $notas = Notas::all();
+        return view('Notas.listar', ['notas' => $notas]);
     }
 
     /**

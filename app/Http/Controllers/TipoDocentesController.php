@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\TipoDocente;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,10 @@ class TipoDocentesController extends Controller
      */
     public function index()
     {
+       
         //
+        $tipoDocente = TipoDocente::all();
+        return view('TipoDocente.listar', ['tipoDocente' => $tipoDocente]);
     }
 
     /**

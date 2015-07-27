@@ -19,7 +19,7 @@ class ComentariosController extends Controller
     {
         //
         $comentarios = Comentarios::all();
-        print_r($comentarios);
+        return view('Comentarios.listar', ['comentarios' => $comentarios]);
     }
 
     /**

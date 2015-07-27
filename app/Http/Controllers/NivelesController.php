@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Niveles;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,10 @@ class NivelesController extends Controller
      */
     public function index()
     {
+      
         //
+        $niveles = Niveles::all();
+        return view('Niveles.listar', ['niveles' => $niveles]);
     }
 
     /**
