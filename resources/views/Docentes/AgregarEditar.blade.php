@@ -16,7 +16,9 @@
         		<button class="btn btn-primary btn-block" type="submit">Sign in</button>
 		  {!! Form::close() !!}
 		</div>	
+</div>
 
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div class="col-lg-4">
       		<ul>
 			    @foreach($errors->all() as $error)
