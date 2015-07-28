@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Docentes;
 use App\Http\Requests;
+use App\Http\Requests\DocentesRules;
 use App\Http\Controllers\Controller;
 
 class DocentesController extends Controller
@@ -19,7 +20,7 @@ class DocentesController extends Controller
         
         //
         $docentes = Docentes::all();
-        return view('Docentes.listar', ['docentes' => $docentes]);
+        return view('Docentes.Listar', ['docentes' => $docentes]);
     }
 
     /**
@@ -30,6 +31,7 @@ class DocentesController extends Controller
     public function create()
     {
         //
+        return view('Docentes.AgregarEditar');
     }
 
     /**
@@ -38,9 +40,9 @@ class DocentesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(DocentesRules $request)
     {
-        //
+        echo "entro conio";
     }
 
     /**

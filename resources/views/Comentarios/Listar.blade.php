@@ -1,4 +1,6 @@
-@extends('../Templates/TemplateMantenimiento')
+@extends('../Templates/TemplateListar')
+@extends('../Templates/TemplateBarra')
+@extends('../Templates/TemplateMenu')
 
 @section('content')
 
