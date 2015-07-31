@@ -36,3 +36,5 @@ Route::resource('comentarios', 'ComentariosController');
 
 Route::resource('materias', 'MateriasController');
 
+Route::resource('login', 'LoginController');
+
