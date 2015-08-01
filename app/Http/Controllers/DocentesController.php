@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Docentes;
+use App\Niveles;
 use App\Http\Requests;
+use Session;
 use App\Http\Requests\DocentesRules;
 use App\Http\Controllers\Controller;
 
@@ -19,8 +21,21 @@ class DocentesController extends Controller
     {
         
         //
+        $mensaje = Session::get('mensaje');
+        $class = Session::get('class');
+
         $docentes = Docentes::all();
-        return view('Docentes.Listar', ['docentes' => $docentes]);
+        $niveles = Niveles::all();
+        foreach($docentes as $d){
+            foreach($niveles as $n){
+                if($d->id_nivel == $n->id){
+                    $d->nivel = $n->descripcion;
+                }
+            }
+        }
+
+        return view('Docentes.Listar', ['docentes' => $docentes,'mensaje' => $mensaje,
+                                                                    'class' => $class]);
     }
 
     /**
@@ -31,7 +46,8 @@ class DocentesController extends Controller
     public function create()
     {
         //
-        return view('Docentes.AgregarEditar');
+        $niveles = Niveles::all();
+        return view('Docentes.Agregar', ['niveles' => $niveles]);
     }
 
     /**
@@ -42,7 +58,23 @@ class DocentesController extends Controller
      */
     public function store(DocentesRules $request)
     {
-        echo "entro conio";
+        
+        $niveles = Niveles::all();
+
+        $docente = Docentes::create($request->all());
+
+        if(isset($docente->id)){
+            $mensaje = "El Docente '".$request->input('nombre')."' fue agregado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+
+        return redirect('docentes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**
@@ -53,7 +85,6 @@ class DocentesController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -64,7 +95,9 @@ class DocentesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $niveles = Niveles::all();
+        return view('Docentes.Editar', ['docente' => Docentes::findOrFail($id), 'niveles' => $niveles]);
     }
 
     /**
@@ -74,9 +107,22 @@ class DocentesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(DocentesRules $request, $id)
     {
-        //
+        $docente = Docentes::find($id)->update($request->all());
+
+        if(isset($docente)){
+            $mensaje = "El Docente '".$request->input('nombre')."' fue editado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('docentes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
+
     }
 
     /**
@@ -87,6 +133,19 @@ class DocentesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $docente = Docentes::find($id);
+        $docente->delete();
+
+        if(isset($docente)){
+            $mensaje = "El Docente '".$docente->nombre."' fue eliminado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('docentes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 }

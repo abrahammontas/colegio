@@ -23,8 +23,9 @@ class DocentesRules extends Request
      */
     public function rules()
     {
-        return [
-        'nombre' => 'required'
-        ];
+            return [
+        'nombre' => 'required', 
+        'id_nivel'=> 'required'];
     }
 }
+?>
