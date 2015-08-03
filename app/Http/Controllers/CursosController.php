@@ -27,7 +27,7 @@ class CursosController extends Controller
         $cursos = Cursos::all();
 
 
-        return view('Cursos.listar', ['cursos' => $cursos, 'mensaje' => $mensaje,
+        return view('Cursos.Listar', ['cursos' => $cursos, 'mensaje' => $mensaje,
                                                                     'class' => $class]);
     }
 
@@ -47,7 +47,7 @@ class CursosController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CursosRules $request)
     {
         $curso = Cursos::create($request->all());
 
@@ -94,7 +94,7 @@ class CursosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(CursosRules $request, $id)
     {
         
         $curso = Cursos::find($id)->update($request->all());

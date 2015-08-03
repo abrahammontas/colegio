@@ -12,4 +12,11 @@ class Materias extends Model
      * @var string
      */
     protected $table = 'materias';
+    protected $guarded = array('id');
+    protected $fillable = array('descripcion','codigo');
+
+    public function CursosMaterias()
+    {
+        return $this->hasMany('App\CursosMaterias');
+    }
 }

@@ -11,5 +11,8 @@ class Niveles extends Model
      *
      * @var string
      */
-    protected $table =  'niveles';
+    protected $table =  'niveles';    
+    protected $guarded = array('id');
+    protected $fillable = array('descripcion');
+
 }

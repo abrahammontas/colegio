@@ -24,9 +24,10 @@
                   <td>{{ $d->id }}</td>
                   <td>{{ $d->nombre }}</td>
                   <td>{{ $d->nivel }}</td>
-                  <td><a href="docentes/{{$d->id}}/edit">Editar</a>
+                  <td>
+                        <a href="docentes/{{$d->id}}/edit" class='btn btn-primary'>Editar</a>
                        {!! Form::open(array('method' => 'DELETE', 'route' => array('docentes.destroy', $d->id))) !!}
-                            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::submit('Eliminar', array('class' => 'btn btn-danger')) !!}
                     {!! Form::close() !!}
                   </td>
                 </tr>
