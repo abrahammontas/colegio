@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Cursos;
 use App\Http\Requests;
+use Session;
+use App\Http\Requests\CursosRules;
 use App\Http\Controllers\Controller;
 
 class CursosController extends Controller
@@ -18,8 +21,14 @@ class CursosController extends Controller
     {
         
         //
+        $mensaje = Session::get('mensaje');
+        $class = Session::get('class');
+
         $cursos = Cursos::all();
-        return view('Cursos.listar', ['cursos' => $cursos]);
+
+
+        return view('Cursos.listar', ['cursos' => $cursos, 'mensaje' => $mensaje,
+                                                                    'class' => $class]);
     }
 
     /**
@@ -29,7 +38,7 @@ class CursosController extends Controller
      */
     public function create()
     {
-        //
+        return view('Cursos.Agregar');
     }
 
     /**
@@ -40,7 +49,20 @@ class CursosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curso = Cursos::create($request->all());
+
+        if(isset($curso->id)){
+            $mensaje = "El Curso '".$request->input('descripcion')."' fue agregado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+
+        return redirect('cursos')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**
@@ -62,7 +84,7 @@ class CursosController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('Cursos.Editar', ['curso' => Cursos::findOrFail($id)]);
     }
 
     /**
@@ -74,7 +96,20 @@ class CursosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $curso = Cursos::find($id)->update($request->all());
+
+        if(isset($curso)){
+            $mensaje = "El Curso '".$request->input('descripcion')."' fue editado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('cursos')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**
@@ -85,6 +120,19 @@ class CursosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Cursos::find($id);
+        $curso->delete();
+
+        if(isset($curso)){
+            $mensaje = "El Curso '".$curso->descripcion."' fue eliminado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('cursos')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 }

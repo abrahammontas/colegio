@@ -29,7 +29,7 @@ class MateriasController extends Controller
      */
     public function create()
     {
-        //
+        return view('Materias.Agregar');
     }
 
     /**

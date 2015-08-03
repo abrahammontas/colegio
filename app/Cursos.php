@@ -11,5 +11,12 @@ class Cursos extends Model
      *
      * @var string
      */
-    protected $table = 'cursos';
+    protected $table = 'cursos';    
+    protected $guarded = array('id');
+    protected $fillable = array('descripcion');
+
+    public function CursosMaterias()
+    {
+        return $this->hasMany('App\CursosMaterias');
+    }
 }
