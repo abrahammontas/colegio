@@ -103,7 +103,7 @@ return [
     */
 
     'attributes' => [
-         'email'=.'E-mail',
+         'email'=>'E-mail',
          'password' => 'Password',
 
     ],
