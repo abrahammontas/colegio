@@ -59,8 +59,6 @@ class DocentesController extends Controller
     public function store(DocentesRules $request)
     {
         
-        $niveles = Niveles::all();
-
         $docente = Docentes::create($request->all());
 
         if(isset($docente->id)){
