@@ -35,7 +35,8 @@ class EstudiantesController extends Controller
         }
         
         return view('Estudiantes.Listar', ['estudiantes' => $estudiantes,'mensaje' => $mensaje,
-                                                                    'class' => $class]);
+                                                                    'class' => $class,
+                                                                    'tabs' => $this->tabs]);
         //
         //$estudiantes = Estudiantes::all();
         //return view('Estudiantes.listar', ['estudiantes' => $estudiantes]);
@@ -51,7 +52,7 @@ class EstudiantesController extends Controller
         //
            //
          $cursos = Cursos::all();
-        return view('Estudiantes.Agregar', ['cursos' => $cursos]);
+        return view('Estudiantes.Agregar', ['cursos' => $cursos, 'tabs' => $this->tabs]);
         
     }
 
@@ -99,7 +100,10 @@ class EstudiantesController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $cursos = Cursos::all();
+        return view('Estudiantes.Editar', ['estudiante' => Estudiantes::findOrFail($id), 'cursos' => $cursos,
+                                                                    'tabs' => $this->tabs]);
     }
 
     /**
@@ -109,9 +113,21 @@ class EstudiantesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(EstudiantesRules $request, $id)
     {
-        //
+        $estudiante = Estudiantes::find($id)->update($request->all());
+
+        if(isset($estudiante)){
+            $mensaje = "El Estudiante '".$request->input('nombre')."' fue editado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('estudiantes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**
@@ -122,6 +138,19 @@ class EstudiantesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $estudiante = Estudiantes::find($id);
+        $estudiante->delete();
+
+        if(isset($estudiante)){
+            $mensaje = "El Estudiante '".$estudiante->nombre."' fue eliminado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('estudiantes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 }

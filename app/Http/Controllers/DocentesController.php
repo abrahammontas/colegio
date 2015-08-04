@@ -35,7 +35,8 @@ class DocentesController extends Controller
         }
 
         return view('Docentes.Listar', ['docentes' => $docentes,'mensaje' => $mensaje,
-                                                                    'class' => $class]);
+                                                                    'class' => $class,
+                                                                    'tabs' => $this->tabs]);
     }
 
     /**
@@ -47,7 +48,7 @@ class DocentesController extends Controller
     {
         //
         $niveles = Niveles::all();
-        return view('Docentes.Agregar', ['niveles' => $niveles]);
+        return view('Docentes.Agregar', ['niveles' => $niveles, 'tabs' => $this->tabs]);
     }
 
     /**
@@ -95,7 +96,8 @@ class DocentesController extends Controller
     {
 
         $niveles = Niveles::all();
-        return view('Docentes.Editar', ['docente' => Docentes::findOrFail($id), 'niveles' => $niveles]);
+        return view('Docentes.Editar', ['docente' => Docentes::findOrFail($id), 'niveles' => $niveles,
+                                                                    'tabs' => $this->tabs]);
     }
 
     /**

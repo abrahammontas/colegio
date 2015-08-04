@@ -12,6 +12,13 @@ use App\Http\Controllers\Controller;
 
 class CursosController extends Controller
 {
+
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +35,8 @@ class CursosController extends Controller
 
 
         return view('Cursos.Listar', ['cursos' => $cursos, 'mensaje' => $mensaje,
-                                                                    'class' => $class]);
+                                                                    'class' => $class,
+                                                                    'tabs' => $this->tabs]);
     }
 
     /**
@@ -38,7 +46,7 @@ class CursosController extends Controller
      */
     public function create()
     {
-        return view('Cursos.Agregar');
+        return view('Cursos.Agregar',['tabs' => $this->tabs]);
     }
 
     /**
@@ -84,7 +92,8 @@ class CursosController extends Controller
      */
     public function edit($id)
     {
-        return view('Cursos.Editar', ['curso' => Cursos::findOrFail($id)]);
+        return view('Cursos.Editar', ['curso' => Cursos::findOrFail($id),
+                                                                    'tabs' => $this->tabs]);
     }
 
     /**
