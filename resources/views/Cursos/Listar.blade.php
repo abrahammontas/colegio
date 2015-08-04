@@ -22,9 +22,12 @@
                 <tr>
                   <td>{{ $c->id }}</td>
                   <td>{{ $c->descripcion }}</td>
-                  <td><a href="cursos/{{$c->id}}/edit" class='btn btn-primary'>Editar</a>
+                  <td>
                        {!! Form::open(array('method' => 'DELETE', 'route' => array('cursos.destroy', $c->id))) !!}
+                         <div class="btn-group" role="group" aria-label="...">   
+                            <a href="cursos/{{$c->id}}/edit" class='btn btn-primary'> Editar </a>
                             {!! Form::submit('Eliminar', array('class' => 'btn btn-danger')) !!}
+                         </div>
                     {!! Form::close() !!}
                   </td>
                 </tr>

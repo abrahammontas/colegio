@@ -24,7 +24,7 @@ class MateriasRules extends Request
     public function rules()
     {
         return [
-            'codigo' => 'required'
+            'codigo' => 'required',
             'descripcion' => 'required'
         ];
     }

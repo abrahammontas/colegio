@@ -24,7 +24,7 @@ Route::resource('docentes', 'DocentesController');
 
 Route::resource('estudiantes', 'EstudiantesController');
 
-Route::resource('tipodocentes', 'TipoDocenteController');
+Route::resource('tipodocentes', 'TipoDocentesController');
 
 Route::resource('notas', 'NotasController');
 

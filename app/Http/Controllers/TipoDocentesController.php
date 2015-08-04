@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TipoDocente;
+use App\TipoDocentes;
+use Session;
+use App\Http\Requests\TipoDocentesRules;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -17,9 +19,12 @@ class TipoDocentesController extends Controller
     public function index()
     {
        
-        //
-        $tipoDocente = TipoDocente::all();
-        return view('TipoDocente.listar', ['tipoDocente' => $tipoDocente]);
+        $mensaje = Session::get('mensaje');
+        $class = Session::get('class');
+
+        $tipoDocente = TipoDocentes::all();
+        return view('TipoDocentes.Listar', ['tipoDocentes' => $tipoDocente, 'mensaje' => $mensaje,
+                                                                    'class' => $class]);
     }
 
     /**
@@ -29,7 +34,7 @@ class TipoDocentesController extends Controller
      */
     public function create()
     {
-        //
+        return view('TipoDocentes.Agregar');
     }
 
     /**
@@ -38,9 +43,22 @@ class TipoDocentesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(TipoDocentesRules $request)
     {
-        //
+        $tipoDocente = TipoDocentes::create($request->all());
+
+        if(isset($tipoDocente->id)){
+            $mensaje = "El Tido de Docente '".$request->input('descripcion')."' fue agregado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+
+        return redirect('tipodocentes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**
@@ -62,7 +80,7 @@ class TipoDocentesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('TipoDocentes.Editar', ['tipoDocente' => TipoDocentes::findOrFail($id)]);
     }
 
     /**
@@ -72,9 +90,21 @@ class TipoDocentesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(TipoDocentesRules $request, $id)
     {
-        //
+        $tipoDocente = TipoDocentes::find($id)->update($request->all());
+
+        if(isset($tipoDocente)){
+            $mensaje = "El Tipo de Docente '".$request->input('descripcion')."' fue editado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('tipodocentes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**
@@ -85,6 +115,19 @@ class TipoDocentesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tipoDocente = TipoDocentes::find($id);
+        $tipoDocente->delete();
+
+        if(isset($tipoDocente)){
+            $mensaje = "El Tipo de Docente '".$tipoDocente->descripcion."' fue eliminado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+        return redirect('tipodocentes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 }

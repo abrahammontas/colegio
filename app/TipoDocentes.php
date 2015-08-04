@@ -11,5 +11,7 @@ class TipoDocentes extends Model
      *
      * @var string
      */
-    protected $table = 'tipo_docente';
+    protected $table = 'tipo_docente';    
+    protected $guarded = array('id');
+    protected $fillable = array('descripcion');
 }

@@ -25,10 +25,13 @@
                   <td>{{ $m->id }}</td>
                   <td>{{ $m->codigo }}</td>
                   <td>{{ $m->descripcion }}</td>
-                  <td><a href="materias/{{$m->id}}/edit" class='btn btn-primary'>Editar</a>
+                  <td>
                        {!! Form::open(array('method' => 'DELETE', 'route' => array('materias.destroy', $m->id))) !!}
+                        <div class="btn-group" role="group" aria-label="..."> 
+                            <a href="materias/{{$m->id}}/edit" class='btn btn-primary'>Editar</a>
                             {!! Form::submit('Eliminar', array('class' => 'btn btn-danger')) !!}
-                    {!! Form::close() !!}
+                        </div>
+                        {!! Form::close() !!}
                   </td>
                 </tr>
                 @endforeach

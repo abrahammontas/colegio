@@ -25,10 +25,12 @@
                   <td>{{ $d->nombre }}</td>
                   <td>{{ $d->nivel }}</td>
                   <td>
-                        <a href="docentes/{{$d->id}}/edit" class='btn btn-primary'>Editar</a>
-                       {!! Form::open(array('method' => 'DELETE', 'route' => array('docentes.destroy', $d->id))) !!}
+                      {!! Form::open(array('method' => 'DELETE', 'route' => array('docentes.destroy', $d->id))) !!}
+                        <div class="btn-group" role="group" aria-label="...">  
+                            <a href="docentes/{{$d->id}}/edit" class='btn btn-primary'>Editar</a>
                             {!! Form::submit('Eliminar', array('class' => 'btn btn-danger')) !!}
-                    {!! Form::close() !!}
+                        </div>
+                      {!! Form::close() !!}
                   </td>
                 </tr>
                 @endforeach
