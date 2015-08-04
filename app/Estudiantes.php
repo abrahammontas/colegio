@@ -12,4 +12,11 @@ class Estudiantes extends Model
      * @var string
      */
     protected $table = 'estudiantes';
+    protected $guarded = array('id');
+    protected $fillable = array('matricula', 'nombre','id_curso');
+
+    public function Cursos()
+    {
+        return $this->hasOne('App\Cursos');
+    }
 }

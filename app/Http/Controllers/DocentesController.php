@@ -62,7 +62,7 @@ class DocentesController extends Controller
         $docente = Docentes::create($request->all());
 
         if(isset($docente->id)){
-            $mensaje = "El Docente '".$request->input('nombre')."' fue agregado exitosamente.";
+            $mensaje = "El Docente '".$request->input('matricula')."' fue agregado exitosamente.";
             $class = "alert alert-success";
         }
         else{

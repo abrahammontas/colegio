@@ -13,7 +13,7 @@ class EstudiantesRules extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,9 @@ class EstudiantesRules extends Request
      */
     public function rules()
     {
-        return [
-            //
-        ];
+           return [
+        'matricula' => 'required', 
+        'nombre' => 'required', 
+        'id_curso'=> 'required'];
     }
 }

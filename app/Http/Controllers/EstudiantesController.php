@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Estudiantes;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EstudiantesRules;
+use App\Cursos;
+use Session;
+
 
 class EstudiantesController extends Controller
 {
@@ -16,10 +20,25 @@ class EstudiantesController extends Controller
      */
     public function index()
     {
+        $mensaje = Session::get('mensaje');
+        $class = Session::get('class');
+
+         $estudiantes = Estudiantes::all();
+         $cursos = Cursos::all();
+
+         foreach($estudiantes as $d){
+            foreach($cursos as $n){
+                if($d->id_cursos == $n->id){
+                    $d->curso = $n->descripcion;
+                }
+            }
+        }
         
+        return view('Estudiantes.Listar', ['estudiantes' => $estudiantes,'mensaje' => $mensaje,
+                                                                    'class' => $class]);
         //
-        $estudiantes = Estudiantes::all();
-        return view('Estudiantes.listar', ['estudiantes' => $estudiantes]);
+        //$estudiantes = Estudiantes::all();
+        //return view('Estudiantes.listar', ['estudiantes' => $estudiantes]);
     }
 
     /**
@@ -30,6 +49,10 @@ class EstudiantesController extends Controller
     public function create()
     {
         //
+           //
+         $cursos = Cursos::all();
+        return view('Estudiantes.Agregar', ['cursos' => $cursos]);
+        
     }
 
     /**
@@ -38,9 +61,23 @@ class EstudiantesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(EstudiantesRules $request)
     {
-        //
+          
+        $estudiante = Estudiantes::create($request->all());
+
+        if(isset($estudiante->id)){
+            $mensaje = "El Estudiante '".$request->input('nombre')."' fue agregado exitosamente.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+
+        return redirect('estudiantes')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
     }
 
     /**

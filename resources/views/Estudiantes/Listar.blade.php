@@ -5,7 +5,12 @@
 @section('content')
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Section title</h2>
+          <h2 class="sub-header">Listado de  Estudiantes</h2>
+          @if($mensaje)
+          <div class='<?php if(isset($class)){echo $class;}?>'>
+            <?php if(isset($mensaje)){echo $mensaje;}?>
+          </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
