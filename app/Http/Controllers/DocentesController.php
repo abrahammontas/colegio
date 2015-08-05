@@ -12,6 +12,12 @@ use App\Http\Controllers\Controller;
 
 class DocentesController extends Controller
 {
+
+     public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *

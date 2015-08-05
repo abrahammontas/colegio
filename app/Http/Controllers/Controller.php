@@ -15,7 +15,7 @@ abstract class Controller extends BaseController
     public function __construct()
     {
 
-    	$uri = $request->path();
+    	// $uri = $request->path();
 
     	$arreglo['cursos'] = '
     				<li role="presentation" >
@@ -94,12 +94,12 @@ abstract class Controller extends BaseController
 								</li>
 							</ul>
 					</li>';		
-		foreach($arreglo as $a){
+		// foreach($arreglo as $a){
 			
-		}
+		// }
 
-					$this->
-    	class="disabled" class="active"
+		// 			$this->
+  //   	class="disabled" class="active"
 		$this->tabs = '<ul class="nav nav-pills nav-stacked">'.'</ul>';
 
     }
