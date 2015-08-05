@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class NotasController extends Controller
 {
+         public function __construct()
+    {
+        parent::__construct();
+    }
     /**
      * Display a listing of the resource.
      *
