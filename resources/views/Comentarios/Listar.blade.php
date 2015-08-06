@@ -1,6 +1,5 @@
 @extends('Templates/TemplateResource')
 @extends('Templates/TemplateBarra')
-@extends('Templates/TemplateMenu')
 
 @section('content')
 

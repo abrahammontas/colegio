@@ -31,7 +31,6 @@
     <div class="container-fluid">
       <div class="row">
 
-            @yield('menu')
             @yield('content')
 
         </div>

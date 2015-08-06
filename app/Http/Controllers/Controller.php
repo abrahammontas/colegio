@@ -15,12 +15,12 @@ abstract class Controller extends BaseController
     public function __construct()
     {
 
-    	// $uri = $request->path();
-
-    	$arreglo['cursos'] = '
-    				<li role="presentation" >
-						<a href="/cursos">Cursos</a>
-							<ul class="">
+    	$this->tabs = '<ul class="nav navbar-nav navbar-right">
+    				<li class="dropdown" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								role="button" aria-haspopup="true" aria-expanded="false">
+								Cursos<span class="caret"></span></a>
+							<ul class="dropdown-menu">
 								<li>
 									<a href="/cursos">Listar Cursos</a>
 								</li>
@@ -28,12 +28,12 @@ abstract class Controller extends BaseController
 									<a href="/cursos/create">Crear Cursos</a>
 								</li>
 							</ul>
-					</li>';
-
-		$arreglo['docentes'] = '
+					</li>
 					<li role="presentation">
-						<a href="/docentes">Docentes</a>
-							<ul class="nav nav-pills nav-stacked">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								role="button" aria-haspopup="true" aria-expanded="false">
+								Docentes<span class="caret"></span></a>
+							<ul class="dropdown-menu">
 								<li>
 									<a href="/docentes">Listar Docentes</a>
 								</li>
@@ -41,12 +41,12 @@ abstract class Controller extends BaseController
 									<a href="/docentes/create">Crear Docentes</a>
 								</li>
 							</ul>
-					</li>';
-
-		$arreglo['estudiantes'] = '
+					</li>
 					<li role="presentation">
-						<a href="/estudiantes">Estudiantes</a>
-							<ul class="nav nav-pills nav-stacked">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								role="button" aria-haspopup="true" aria-expanded="false">
+								Estudiantes<span class="caret"></span></a>
+							<ul class="dropdown-menu">
 								<li>
 									<a href="/estudiantes">Listar Estudiantes</a>
 								</li>
@@ -54,12 +54,12 @@ abstract class Controller extends BaseController
 									<a href="/estudiantes/create">Crear Estudiantes</a>
 								</li>
 							</ul>
-					</li>';
-
-		$arreglo['materias'] = '
+					</li>
 					<li role="presentation">
-						<a href="/materias">Materias</a>
-							<ul class="nav nav-pills nav-stacked">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								role="button" aria-haspopup="true" aria-expanded="false">
+								Materias<span class="caret"></span></a>
+							<ul class="dropdown-menu">
 								<li>
 									<a href="/materias">Listar Materias</a>
 								</li>
@@ -67,12 +67,12 @@ abstract class Controller extends BaseController
 									<a href="/materias/create">Crear Materias</a>
 								</li>
 							</ul>
-					</li>';
-
-		$arreglo['niveles'] = '
+					</li>
 					<li role="presentation">
-						<a href="/niveles">Niveles</a>
-							<ul class="nav nav-pills nav-stacked">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								role="button" aria-haspopup="true" aria-expanded="false">
+								Niveles<span class="caret"></span></a>
+							<ul class="dropdown-menu">
 								<li>
 									<a href="/niveles">Listar Niveles</a>
 								</li>
@@ -80,12 +80,12 @@ abstract class Controller extends BaseController
 									<a href="/niveles/create">Crear Niveles</a>
 								</li>
 							</ul>
-					</li>';
-
-		$arreglo['tipodocentes'] = '
+					</li>
 					<li role="presentation">
-						<a href="/tipodocentes">Tipo de Docentes</a>
-							<ul class="nav nav-pills nav-stacked">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								role="button" aria-haspopup="true" aria-expanded="false">
+								Tipo de Docentes<span class="caret"></span></a>
+							<ul class="dropdown-menu">
 								<li>
 									<a href="/tipodocentes">Listar Tipo de Docentes</a>
 								</li>
@@ -93,14 +93,8 @@ abstract class Controller extends BaseController
 									<a href="/tipodocentes/create">Crear Tipo de Docentes</a>
 								</li>
 							</ul>
-					</li>';		
-		// foreach($arreglo as $a){
-			
-		// }
-
-		// 			$this->
-  //   	class="disabled" class="active"
-		$this->tabs = '<ul class="nav nav-pills nav-stacked">'.'</ul>';
+					</li>
+					</ul>';		
 
     }
 }

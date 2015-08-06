@@ -4,18 +4,26 @@
 @section('content')
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div class="col-lg-4">
-          <h2 class="sub-header">Agregar Docente</h2>
-          {!! Form::open(array('url' => 'docentes')) !!}
+          <h2 class="sub-header">Editar Estudiante ({{$estudiante->estudiante}})</h2>
+          {!! Form::model($estudiante, array('route' => array('estudiantes.update', $estudiante->id),'method' => 'put')) !!}
           	<div class="form-group">
+			    {!! Form::label('Matricula') !!}
+			    {!! Form::text('matricula', null, 
+			        array('class'=>'form-control', 
+			              'placeholder'=>'2009-7115')) !!}
+			</div> 
+
+			<div class="form-group">
 			    {!! Form::label('Nombre') !!}
 			    {!! Form::text('nombre', null, 
 			        array('class'=>'form-control', 
-			              'placeholder'=>'Juan Perez Martinez')) !!}
+			              'placeholder'=>'Juan Perez')) !!}
 			</div> 
+
 			<div class="form-group">             	
-			    {!! Form::label('Nivel') !!}
-        		<select class= "form-control" name="id_nivel" id="id_nivel">
-        			@foreach($niveles as $n)
+			    {!! Form::label('Curso') !!}
+        		<select class= "form-control" name="id_curso" id="Curso">
+        			@foreach($cursos as $n)
                 	<option value="{{$n->id}}">{{ $n->descripcion }}</option>
                 	@endforeach
     			</select>		              
