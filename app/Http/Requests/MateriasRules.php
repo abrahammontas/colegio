@@ -25,7 +25,8 @@ class MateriasRules extends Request
     {
         return [
             'codigo' => 'required',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'coordinador' => 'required'
         ];
     }
 }

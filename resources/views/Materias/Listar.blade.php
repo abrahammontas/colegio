@@ -15,6 +15,7 @@
                   <th>#</th>
                   <th>Codigo</th>
                   <th>Descripcion</th>
+                  <th>Coordinador</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -24,6 +25,7 @@
                   <td>{{ $m->id }}</td>
                   <td>{{ $m->codigo }}</td>
                   <td>{{ $m->descripcion }}</td>
+                  <td>{{ $m->docente->nombre }}</td>
                   <td>
                        {!! Form::open(array('method' => 'DELETE', 'route' => array('materias.destroy', $m->id))) !!}
                         <div class="btn-group" role="group" aria-label="..."> 

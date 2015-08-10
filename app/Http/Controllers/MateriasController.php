@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Materias;
+use App\Docentes;
 use App\Http\Requests;
 use Session;
 use App\Http\Requests\MateriasRules;
@@ -27,11 +28,12 @@ class MateriasController extends Controller
         $mensaje = Session::get('mensaje');
         $class = Session::get('class');
 
-        $materias = Materias::all();
+        $materias = Materias::with('Docente')->get();
 
 
         return view('Materias.Listar', ['materias' => $materias, 'mensaje' => $mensaje,
-                                                                    'class' => $class]);
+                                                                    'class' => $class,
+                                                                    'tabs' => $this->tabs]);
     }
 
     /**
@@ -41,7 +43,8 @@ class MateriasController extends Controller
      */
     public function create()
     {
-        return view('Materias.Agregar');
+        $docentes = Docentes::all();
+        return view('Materias.Agregar',['docentes' => $docentes, 'tabs' => $this->tabs]);
     }
 
     /**
@@ -87,7 +90,9 @@ class MateriasController extends Controller
      */
     public function edit($id)
     {
-        return view('Materias.Editar', ['materia' => Materias::findOrFail($id)]);
+        
+        $docentes = Docentes::all();
+        return view('Materias.Editar', ['materia' => Materias::findOrFail($id), 'docentes' => $docentes, 'tabs' => $this->tabs]);
     }
 
     /**
