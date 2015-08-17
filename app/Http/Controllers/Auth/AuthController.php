@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\Http\Requests\LoginRules;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
@@ -22,6 +24,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    private $redirectTo = '/';
+
 
     /**
      * Create a new authentication controller instance.
@@ -60,6 +64,97 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'id_tipo' => 0
         ]);
     }
+
+    public function getLogin(){
+
+            return view('auth.login', ['tabs' => ""]);
+
+    }
+
+  public function postLogin(LoginRules  $request) {
+
+      $userdata = array(
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+          );
+      // doing login.
+      if (\Auth::validate($userdata)) {
+        if (\Auth::attempt($userdata)) {
+          $user = \Auth::user();
+          if($user->enrolado == 0){
+            return redirect('Auth/getChangePassword');
+          }
+          return redirect('home');
+        }
+      } 
+      else {
+        // if any error send back with message. 
+        return redirect('/')->withErrors("El email o la contaseña se encuentran incorrectas.");;
+      }
+    
+  }
+
+    public function getLogout() {
+      \Auth::logout(); // logout user
+      return redirect('/'); //redirect back to login
+    }
+
+    public function getRegistrar(){
+
+            return view('auth.register', ['tabs' => ""]);
+    }
+
+    public function postRegistrar(RegisterRules $request){
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'id_tipo' => 0,
+            'enrolado' => 0,
+            'id_nivel_docente' => 0
+        ]);
+
+        if(isset($docente->id)){
+            $mensaje = "Su usuario fue agregado exitosamente. Ya puede ingresar con su email y contraseña.";
+            $class = "alert alert-success";
+        }
+        else{
+            $mensaje = "Ocurrio un error, por favor intentar nuevamente.";
+            $class = "alert alert-danger";
+        }
+
+
+        return redirect('login')->with('mensaje', $mensaje)
+                                   ->with('class', $class);
+
+        
+    }
+
+    public function getChangePassword(){
+        $mensaje = "Para poder continuar debe cambiar la contraseña.";
+        $class = "alert alert-danger";
+            return view('auth.changePassword', ['mensaje' => $mensaje,
+                'class', $class, 'tabs' => ""]);
+    }
+
+    public function postChangePassword(ChangePasswordRules $request, $id)
+    {
+                    $user = User::find($id)->update([
+                  'password' => bcrypt($data['password']),
+                  'enrolado' => 1
+              ]);
+
+              $mensaje = "Ya puede iniciar seccion con su contraseña nueva.";
+              $class = "alert alert-success";
+
+            \Auth::logout(); // logout user
+            return redirect('/')->with('mensaje', $mensaje)
+                                         ->with('class', $class);
+
+    }
+
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class TipoDocentesRules extends Request
+class LoginRules extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class TipoDocentesRules extends Request
     public function rules()
     {
         return [
-            'descripcion' => 'required'
+        'email' => 'required|email',
+        'password' => 'required|min:6'
         ];
     }
 }

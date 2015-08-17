@@ -10,31 +10,40 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('inicio', 'HomeController');
 
-Route::get('/', function () {
-    return view('welcome');
+	Route::resource('estudiantes', 'EstudiantesController');
+
+	Route::resource('docentes', 'DocentesController');
+
+	Route::resource('estudiantes', 'EstudiantesController');
+
+	Route::resource('tipouser', 'TipoUserController');
+
+	Route::resource('notas', 'NotasController');
+
+	Route::resource('niveles', 'NivelesController');
+
+	Route::resource('cursos', 'CursosController');
+
+	Route::resource('comentarios', 'ComentariosController');
+
+	Route::resource('materias', 'MateriasController');
+
+	Route::get('logout', 'Auth\AuthController@getLogout');
+
+
 });
 
+// GET route
+Route::get('/', array('middleware' => 'guest',
+	'uses' => 'Auth\AuthController@getLogin'));
 
-Route::resource('inicio', 'HomeController');
+//POST route
+Route::post('login', 'Auth\AuthController@postLogin');
 
-Route::resource('estudiantes', 'EstudiantesController');
 
-Route::resource('docentes', 'DocentesController');
-
-Route::resource('estudiantes', 'EstudiantesController');
-
-Route::resource('tipodocentes', 'TipoDocentesController');
-
-Route::resource('notas', 'NotasController');
-
-Route::resource('niveles', 'NivelesController');
-
-Route::resource('cursos', 'CursosController');
-
-Route::resource('comentarios', 'ComentariosController');
-
-Route::resource('materias', 'MateriasController');
-
-Route::resource('login', 'LoginController');
-
+// Registration routes...
+Route::get('registrar', 'Auth\AuthController@getRegistrar');
+Route::post('registrar', 'Auth\AuthController@postRegistrar');

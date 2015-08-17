@@ -23,7 +23,7 @@ class NotasController extends Controller
         
         //
         $notas = Notas::all();
-        return view('Notas.listar', ['notas' => $notas]);
+        return view('Notas.listar', ['notas' => $notas,'tabs' => $this->tabs]);
     }
 
     /**

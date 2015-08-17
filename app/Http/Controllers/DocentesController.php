@@ -26,9 +26,6 @@ class DocentesController extends Controller
     public function index()
     {
         
-        //
-        $mensaje = Session::get('mensaje');
-        $class = Session::get('class');
 
         $docentes = Docentes::all();
         $niveles = Niveles::all();
@@ -40,9 +37,7 @@ class DocentesController extends Controller
             }
         }
 
-        return view('Docentes.Listar', ['docentes' => $docentes,'mensaje' => $mensaje,
-                                                                    'class' => $class,
-                                                                    'tabs' => $this->tabs]);
+        return view('Docentes.Listar', ['docentes' => $docentes,'tabs' => $this->tabs]);
     }
 
     /**

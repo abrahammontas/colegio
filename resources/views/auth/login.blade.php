@@ -1,4 +1,5 @@
-@extends('../Templates/layout')
+@extends('Templates/TemplateResource')
+@extends('Templates/TemplateBarra')
 
 @section('content')
 <div class="container-fluid">
@@ -18,13 +19,13 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/auth/login">
+					<form class="form-horizontal" role="form" method="POST" action="login">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Email</label>
 							<div class="col-md-6">
-								<input type="email" value="{{old('email')}}" class="form-control">
+								<input type="email" name="email" id="email" value="{{old('email')}}" class="form-control">
 							    
 							</div>
 						</div>
@@ -32,7 +33,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Password</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control">
+								<input type="password" name="password" id="password" class="form-control">
 						    	
 							</div>
 						</div>

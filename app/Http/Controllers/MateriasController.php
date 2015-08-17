@@ -24,16 +24,11 @@ class MateriasController extends Controller
     public function index()
     {
        
-        //
-        $mensaje = Session::get('mensaje');
-        $class = Session::get('class');
 
         $materias = Materias::with('Docente')->get();
 
 
-        return view('Materias.Listar', ['materias' => $materias, 'mensaje' => $mensaje,
-                                                                    'class' => $class,
-                                                                    'tabs' => $this->tabs]);
+        return view('Materias.Listar', ['materias' => $materias,'tabs' => $this->tabs]);
     }
 
     /**

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TipoDocentes;
+use App\TipoUser;
 use Session;
-use App\Http\Requests\TipoDocentesRules;
+use App\Http\Requests\TipoUserRules;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class TipoDocentesController extends Controller
+class TipoUserController extends Controller
 {
          public function __construct()
     {
@@ -23,12 +23,9 @@ class TipoDocentesController extends Controller
     public function index()
     {
        
-        $mensaje = Session::get('mensaje');
-        $class = Session::get('class');
 
-        $tipoDocente = TipoDocentes::all();
-        return view('TipoDocentes.Listar', ['tipoDocentes' => $tipoDocente, 'mensaje' => $mensaje,
-                                                                    'class' => $class]);
+        $tipoUser = TipoUser::all();
+        return view('TipoUser.Listar', ['tipoUser' => $tipoUser,'tabs' => $this->tabs]);
     }
 
     /**
@@ -38,7 +35,7 @@ class TipoDocentesController extends Controller
      */
     public function create()
     {
-        return view('TipoDocentes.Agregar');
+        return view('TipoUser.Agregar',['tabs' => $this->tabs]);
     }
 
     /**
@@ -47,12 +44,12 @@ class TipoDocentesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(TipoDocentesRules $request)
+    public function store(TipoUserRules $request)
     {
-        $tipoDocente = TipoDocentes::create($request->all());
+        $tipoUser = TipoUser::create($request->all());
 
-        if(isset($tipoDocente->id)){
-            $mensaje = "El Tido de Docente '".$request->input('descripcion')."' fue agregado exitosamente.";
+        if(isset($tipoUser->id)){
+            $mensaje = "El Tido de Usuario '".$request->input('nombre')."' fue agregado exitosamente.";
             $class = "alert alert-success";
         }
         else{
@@ -61,7 +58,7 @@ class TipoDocentesController extends Controller
         }
 
 
-        return redirect('tipodocentes')->with('mensaje', $mensaje)
+        return redirect('tipouser')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
 
@@ -84,7 +81,7 @@ class TipoDocentesController extends Controller
      */
     public function edit($id)
     {
-        return view('TipoDocentes.Editar', ['tipoDocente' => TipoDocentes::findOrFail($id)]);
+        return view('TipoUser.Editar', ['tipoUser' => TipoUser::findOrFail($id),'tabs' => $this->tabs]);
     }
 
     /**
@@ -94,12 +91,12 @@ class TipoDocentesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(TipoDocentesRules $request, $id)
+    public function update(TipoUserRules $request, $id)
     {
-        $tipoDocente = TipoDocentes::find($id)->update($request->all());
+        $tipoUser = TipoUser::find($id)->update($request->all());
 
-        if(isset($tipoDocente)){
-            $mensaje = "El Tipo de Docente '".$request->input('descripcion')."' fue editado exitosamente.";
+        if(isset($tipoUser)){
+            $mensaje = "El Tipo de Usuario '".$request->input('nombre')."' fue editado exitosamente.";
             $class = "alert alert-success";
         }
         else{
@@ -107,7 +104,7 @@ class TipoDocentesController extends Controller
             $class = "alert alert-danger";
         }
 
-        return redirect('tipodocentes')->with('mensaje', $mensaje)
+        return redirect('tipouser')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
 
@@ -119,11 +116,11 @@ class TipoDocentesController extends Controller
      */
     public function destroy($id)
     {
-        $tipoDocente = TipoDocentes::find($id);
-        $tipoDocente->delete();
+        $tipoUser = TipoUser::find($id);
+        $tipoUser->delete();
 
-        if(isset($tipoDocente)){
-            $mensaje = "El Tipo de Docente '".$tipoDocente->descripcion."' fue eliminado exitosamente.";
+        if(isset($tipoUser)){
+            $mensaje = "El Tipo de Usuario '".$tipoUser->nombre."' fue eliminado exitosamente.";
             $class = "alert alert-success";
         }
         else{
@@ -131,7 +128,7 @@ class TipoDocentesController extends Controller
             $class = "alert alert-danger";
         }
 
-        return redirect('tipodocentes')->with('mensaje', $mensaje)
+        return redirect('tipouser')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
 }

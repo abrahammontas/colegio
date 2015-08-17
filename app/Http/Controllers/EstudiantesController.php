@@ -25,8 +25,6 @@ class EstudiantesController extends Controller
      */
     public function index()
     {
-        $mensaje = Session::get('mensaje');
-        $class = Session::get('class');
 
          $estudiantes = Estudiantes::all();
          $cursos = Cursos::all();
@@ -39,9 +37,7 @@ class EstudiantesController extends Controller
             }
         }
         
-        return view('Estudiantes.Listar', ['estudiantes' => $estudiantes,'mensaje' => $mensaje,
-                                                                    'class' => $class,
-                                                                    'tabs' => $this->tabs]);
+        return view('Estudiantes.Listar', ['estudiantes' => $estudiantes,'tabs' => $this->tabs]);
         //
         //$estudiantes = Estudiantes::all();
         //return view('Estudiantes.listar', ['estudiantes' => $estudiantes]);

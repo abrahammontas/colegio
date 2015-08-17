@@ -26,17 +26,10 @@ class CursosController extends Controller
      */
     public function index()
     {
-        
-        //
-        $mensaje = Session::get('mensaje');
-        $class = Session::get('class');
-
         $cursos = Cursos::all();
 
 
-        return view('Cursos.Listar', ['cursos' => $cursos, 'mensaje' => $mensaje,
-                                                                    'class' => $class,
-                                                                    'tabs' => $this->tabs]);
+        return view('Cursos.Listar', ['cursos' => $cursos,'tabs' => $this->tabs]);
     }
 
     /**

@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipoDocentes extends Model
+class TipoUser extends Model
 {
         /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'tipo_docente';    
+    protected $table = 'tipo_users';    
     protected $guarded = array('id');
-    protected $fillable = array('descripcion');
+    protected $fillable = array('nombre','pantalla');
 }

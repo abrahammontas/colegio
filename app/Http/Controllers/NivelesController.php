@@ -23,12 +23,8 @@ class NivelesController extends Controller
     public function index()
     {
       
-        //
-        $mensaje = Session::get('mensaje');
-        $class = Session::get('class');
         $niveles = Niveles::all();
-        return view('Niveles.listar', ['niveles' => $niveles, 'mensaje' => $mensaje,
-                                                                    'class' => $class]);
+        return view('Niveles.listar', ['niveles' => $niveles,'tabs' => $this->tabs]);
     }
 
     /**
@@ -38,7 +34,7 @@ class NivelesController extends Controller
      */
     public function create()
     {
-        return view('Niveles.Agregar');
+        return view('Niveles.Agregar','tabs' => $this->tabs);
     }
 
     /**
