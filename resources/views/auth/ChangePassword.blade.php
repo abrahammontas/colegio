@@ -9,6 +9,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Cambiar contraseña</div>
                 <div class="panel-body">
+                          <div class='<?php if(isset($class)){echo $class;}?>'>
+                        <?php if(isset($mensaje)){echo $mensaje;}?>
+                        </div>
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong><br><br>
@@ -20,7 +23,7 @@
                         </div>
                     @endif
  
-                    <form class="form-horizontal" role="form" method="POST" action="ChangePassword">
+                    <form class="form-horizontal" role="form" method="POST" action="change-password/{{$user->id}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
  
                         <div class="form-group">

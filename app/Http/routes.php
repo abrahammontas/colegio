@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('inicio', 'HomeController');
 
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('logout', 'Auth\AuthController@getLogout');
 
+	Route::controller('auth', 'Auth\AuthController');
 
 });
 

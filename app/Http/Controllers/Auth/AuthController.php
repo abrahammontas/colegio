@@ -8,6 +8,7 @@ use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Http\Requests\LoginRules;
+use App\Http\Requests\ChangePasswordRules;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
@@ -34,7 +35,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout', 'getChangePassword',
+                                                 'postChangePassword']]);
     }
 
     /**
@@ -85,7 +87,7 @@ class AuthController extends Controller
         if (\Auth::attempt($userdata)) {
           $user = \Auth::user();
           if($user->enrolado == 0){
-            return redirect('Auth/getChangePassword');
+            return redirect('auth/change-password');
           }
           return redirect('home');
         }
@@ -110,9 +112,9 @@ class AuthController extends Controller
     public function postRegistrar(RegisterRules $request){
 
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password'),
             'id_tipo' => 0,
             'enrolado' => 0,
             'id_nivel_docente' => 0
@@ -137,14 +139,16 @@ class AuthController extends Controller
     public function getChangePassword(){
         $mensaje = "Para poder continuar debe cambiar la contraseña.";
         $class = "alert alert-danger";
+        $user = \Auth::user();
+        
             return view('auth.changePassword', ['mensaje' => $mensaje,
-                'class', $class, 'tabs' => ""]);
+                'class' => $class, 'tabs' => "", 'user' => $user]);
     }
 
     public function postChangePassword(ChangePasswordRules $request, $id)
     {
                     $user = User::find($id)->update([
-                  'password' => bcrypt($data['password']),
+                  'password' => bcrypt($request->input('password'),
                   'enrolado' => 1
               ]);
 
