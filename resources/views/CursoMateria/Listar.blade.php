@@ -4,7 +4,7 @@
 @section('content')
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Listado de Materias</h2>
+          <h2 class="sub-header">Listado de Cursos/Materias</h2>
           <div class='<?php if(isset($class)){echo $class;}?>'>
             <?php if(isset($mensaje)){echo $mensaje;}?>
           </div>
@@ -13,21 +13,25 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Codigo</th>
-                  <th>Descripcion</th>
+                  <th>Curso</th>
+                  <th>Materia</th>
+                  <th>Coordinador</th>
+                  <th>Profesor</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($materias as $m)
+                @foreach($CursosMaterias as $c)
                 <tr>
-                  <td>{{ $m->id }}</td>
-                  <td>{{ $m->codigo }}</td>
-                  <td>{{ $m->descripcion }}</td>
+                  <td>{{ $c->id }}</td>
+                  <td>{{ $c->Cursos->descripcion }}</td>
+                  <td>{{ $c->Materias->descripcion }}</td>
+                  <td>{{ $c->Coordinador->name }}</td>
+                  <td>{{ $c->Profesor->name }}</td>
                   <td>
-                       {!! Form::open(array('method' => 'DELETE', 'route' => array('materias.destroy', $m->id))) !!}
+                       {!! Form::open(array('method' => 'DELETE', 'route' => array('cursos-materias.destroy', $c->id))) !!}
                         <div class="btn-group" role="group" aria-label="..."> 
-                            <a href="materias/{{$m->id}}/edit" class='btn btn-primary'>Editar</a>
+                            <a href="cursos-materias/{{$c->id}}/edit" class='btn btn-primary'>Editar</a>
                             {!! Form::submit('Eliminar', array('class' => 'btn btn-danger')) !!}
                         </div>
                         {!! Form::close() !!}

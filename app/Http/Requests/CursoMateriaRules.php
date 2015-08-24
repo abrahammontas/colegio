@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class MateriasRules extends Request
+class CursoMateriaRules extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class MateriasRules extends Request
     public function rules()
     {
         return [
-            'codigo' => 'required',
-            'descripcion' => 'required'
+            'id_coordinador' => 'required',
+            'id_profesor' => 'required',
+            'id_curso' => 'required',
+            'id_materia' => 'required'
         ];
     }
 }

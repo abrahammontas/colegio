@@ -114,7 +114,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'),
+            'password' => bcrypt($request->input('password')),
             'id_tipo' => 0,
             'enrolado' => 0,
             'id_nivel_docente' => 0
@@ -148,7 +148,7 @@ class AuthController extends Controller
     public function postChangePassword(ChangePasswordRules $request, $id)
     {
                     $user = User::find($id)->update([
-                  'password' => bcrypt($request->input('password'),
+                  'password' => bcrypt($request->input('password')),
                   'enrolado' => 1
               ]);
 

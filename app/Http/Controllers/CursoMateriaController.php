@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Materias;
+use App\CursosMaterias;
 use App\User;
+use App\Cursos;
+use App\Materias;
 use App\Http\Requests;
 use Session;
-use App\Http\Requests\MateriasRules;
+use App\Http\Requests\CursoMateriaRules;
 use App\Http\Controllers\Controller;
 
-class MateriasController extends Controller
+class CursoMateriaController extends Controller
 {
          public function __construct()
     {
@@ -24,11 +26,9 @@ class MateriasController extends Controller
     public function index()
     {
        
-
-        $materias = Materias::with('Users')->get();
-        dd($materias);
-
-        return view('Materias.Listar', ['materias' => $materias,'tabs' => $this->tabs]);
+        $CursosMaterias = CursosMaterias::with('Cursos', 'Materias', 'Coordinador', 'Profesor')->get();
+        
+        return view('CursoMateria.Listar', ['CursosMaterias' => $CursosMaterias,'tabs' => $this->tabs]);
     }
 
     /**
@@ -39,7 +39,11 @@ class MateriasController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('Materias.Agregar',['users' => $users, 'tabs' => $this->tabs]);
+        $cursos = Cursos::all();
+        $materias = Materias::all();
+
+        return view('CursoMateria.Agregar',['cursos' => $cursos, 'users' => $users,
+                            'materias' => $materias,'tabs' => $this->tabs]);
     }
 
     /**
@@ -48,12 +52,12 @@ class MateriasController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(MateriasRules $request)
+    public function store(CursoMateriaRules $request)
     {
-        $materia = Materias::create($request->all());
+        $CursoMateria = CursosMaterias::create($request->all());
 
-        if(isset($materia->id)){
-            $mensaje = "La Materia '".$request->input('descripcion')."' fue agregada exitosamente.";
+        if(isset($CursoMateria->id)){
+            $mensaje = "La Relacion Curso/Materia '".$request->input('descripcion')."' fue agregada exitosamente.";
             $class = "alert alert-success";
         }
         else{
@@ -62,7 +66,7 @@ class MateriasController extends Controller
         }
 
 
-        return redirect('materias')->with('mensaje', $mensaje)
+        return redirect('cursos-materias')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
 
@@ -85,9 +89,13 @@ class MateriasController extends Controller
      */
     public function edit($id)
     {
-        
+
         $users = User::all();
-        return view('Materias.Editar', ['materia' => Materias::findOrFail($id), 'users' => $users, 'tabs' => $this->tabs]);
+        $cursos = Cursos::all();
+        $materias = Materias::all();
+        return view('CursoMateria.Editar', ['CursosMaterias' => CursosMaterias::findOrFail($id),
+                                         'users' => $users,'cursos' => $cursos,
+                                         'materias' => $materias,'tabs' => $this->tabs]);
     }
 
     /**
@@ -97,12 +105,12 @@ class MateriasController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(MateriasRules $request, $id)
+    public function update(CursoMateriaRules $request, $id)
     {
-        $materia = Materias::find($id)->update($request->all());
+        $CursosMaterias = CursosMaterias::find($id)->update($request->all());
 
-        if(isset($materia)){
-            $mensaje = "La Materia '".$request->input('descripcion')."' fue editada exitosamente.";
+        if(isset($CursosMaterias)){
+            $mensaje = "La Relacion Curso/Materia '".$request->input('descripcion')."' fue editada exitosamente.";
             $class = "alert alert-success";
         }
         else{
@@ -110,7 +118,7 @@ class MateriasController extends Controller
             $class = "alert alert-danger";
         }
 
-        return redirect('materias')->with('mensaje', $mensaje)
+        return redirect('cursos-materias')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
 
@@ -122,11 +130,11 @@ class MateriasController extends Controller
      */
     public function destroy($id)
     {
-        $materia = Materias::find($id);
-        $materia->delete();
+        $CursosMaterias = CursosMaterias::find($id);
+        $CursosMaterias->delete();
 
-        if(isset($materia)){
-            $mensaje = "La Materia '".$materia->descripcion."' fue eliminada exitosamente.";
+        if(isset($CursosMaterias)){
+            $mensaje = "La Relacion Curso/Materia fue eliminada exitosamente.";
             $class = "alert alert-success";
         }
         else{
@@ -134,7 +142,7 @@ class MateriasController extends Controller
             $class = "alert alert-danger";
         }
 
-        return redirect('materias')->with('mensaje', $mensaje)
+        return redirect('cursos-materias')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
 }

@@ -20,8 +20,8 @@ class Materias extends Model
         return $this->hasMany('App\CursosMaterias');
     }
 
-    public function Docente()
+    public function Users()
     {
-        return $this->hasOne('App\Docentes','id','id_coordinador');
+        return $this->hasOne('App\User','id','id_coordinador');
     }
 }

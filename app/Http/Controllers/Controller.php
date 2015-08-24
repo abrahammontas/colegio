@@ -15,6 +15,22 @@ abstract class Controller extends BaseController
     public function __construct()
     {
 
+
+					// <li role="presentation">
+					// 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+					// 			role="button" aria-haspopup="true" aria-expanded="false">
+					// 			Docentes<span class="caret"></span></a>
+					// 		<ul class="dropdown-menu">
+					// 			<li>
+					// 				<a href="/docentes">Listar Docentes</a>
+					// 			</li>
+					// 			<li>
+					// 				<a href="/docentes/create">Crear Docentes</a>
+					// 			</li>
+					// 		</ul>
+					// </li>
+
+
     	$this->tabs = '<ul class="nav navbar-nav navbar-right">
     				<li class="dropdown" >
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
@@ -26,19 +42,6 @@ abstract class Controller extends BaseController
 								</li>
 								<li>
 									<a href="/cursos/create">Crear Cursos</a>
-								</li>
-							</ul>
-					</li>
-					<li role="presentation">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-								role="button" aria-haspopup="true" aria-expanded="false">
-								Docentes<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="/docentes">Listar Docentes</a>
-								</li>
-								<li>
-									<a href="/docentes/create">Crear Docentes</a>
 								</li>
 							</ul>
 					</li>
@@ -78,19 +81,6 @@ abstract class Controller extends BaseController
 								</li>
 								<li>
 									<a href="/niveles/create">Crear Niveles</a>
-								</li>
-							</ul>
-					</li>
-					<li role="presentation">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-								role="button" aria-haspopup="true" aria-expanded="false">
-								Tipo de Docentes<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="/tipodocentes">Listar Tipo de Docentes</a>
-								</li>
-								<li>
-									<a href="/tipodocentes/create">Crear Tipo de Docentes</a>
 								</li>
 							</ul>
 					</li>

@@ -18,14 +18,6 @@
 			        array('class'=>'form-control', 
 			              'placeholder'=>'M08-234')) !!}
 			</div>
-			<div class="form-group">             	
-			    {!! Form::label('Coordinador') !!}
-        		<select class= "form-control" name="id_coordinador" id="id_coordinador">
-        			@foreach($docentes as $d)
-                	<option value="{{$d->id}}">{{ $d->nombre }}</option>
-                	@endforeach
-    			</select>		              
-			</div>
         		<button class="btn btn-primary btn-block" type="submit">Agregar</button>
 		  {!! Form::close() !!}
 		</div>			
