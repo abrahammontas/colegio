@@ -19,4 +19,9 @@ class Cursos extends Model
     {
         return $this->hasMany('App\CursosMaterias');
     }
+
+    public function Estudiantes()
+    {
+        return $this->hasMany('App\Estudiantes', 'id_curso', 'id');
+    }
 }

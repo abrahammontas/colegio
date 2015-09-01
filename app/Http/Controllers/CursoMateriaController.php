@@ -26,7 +26,7 @@ class CursoMateriaController extends Controller
     public function index()
     {
        
-        $CursosMaterias = CursosMaterias::with('Cursos', 'Materias', 'Coordinador', 'Profesor')->get();
+        $CursosMaterias = CursosMaterias::with('Curso', 'Materia', 'Coordinador', 'Profesor')->get();
         
         return view('CursoMateria.Listar', ['CursosMaterias' => $CursosMaterias,'tabs' => $this->tabs]);
     }

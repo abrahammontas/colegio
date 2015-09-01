@@ -145,6 +145,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /* 
+         * Third Parties
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*

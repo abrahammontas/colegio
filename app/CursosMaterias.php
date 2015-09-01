@@ -15,12 +15,12 @@ class CursosMaterias extends Model
     protected $guarded = array('id');
     protected $fillable = array('id_curso','id_materia','id_coordinador','id_profesor');
 
-    public function Materias()
+    public function Materia()
     {
         return $this->hasOne('App\Materias','id','id_materia');
     }    
 
-    public function Cursos()
+    public function Curso()
     {
         return $this->hasOne('App\Cursos','id','id_curso');
     }
@@ -35,4 +35,8 @@ class CursosMaterias extends Model
         return $this->hasOne('App\User','id','id_profesor');
     }
 
+    public function Notas()
+    {
+        return $this->hasMany('App\Notas', 'id_cursomateria', 'id');
+    }
 }

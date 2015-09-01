@@ -19,4 +19,9 @@ class Estudiantes extends Model
     {
         return $this->hasOne('App\Cursos');
     }
+
+    public function Notas()
+    {
+        return $this->hasMany('App\Notas','id_estudiante','id');
+    }
 }

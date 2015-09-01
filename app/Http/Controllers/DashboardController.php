@@ -14,39 +14,27 @@ use App\Http\Controllers\Controller;
 class DashboardController extends Controller
 {
     /**
-     * Responds to requests to GET /users
+     * Responds to requests to GET /docente
      */
-    public function getIndexDocente()
+    public function getDocente()
     {
         $user = \Auth::user();
-        $CursosMaterias = CursosMaterias::with('Cursos', 'Materias', 'Coordinador', 'Profesor')->get();
+        $CursosMateriasProf = CursosMaterias::with('Curso', 'Materia', 'Coordinador', 'Profesor')
+                                ->where('id_profesor', '=', $user->id)
+                                ->where('id_coordinador', '!=', $user->id)
+                                ->get();
+
+        $CursosMateriasCoo = CursosMaterias::with('Curso', 'Materia', 'Coordinador', 'Profesor')
+                                ->where('id_coordinador', '=', $user->id)
+                                ->get();                                
 
         return view('Dashboard.ListarDocentes', 
-            ['CursosMaterias' => $CursosMaterias,
+            ['CursosMateriasProf' => $CursosMateriasProf,
+            'CursosMateriasCoo' => $CursosMateriasCoo,
             'tabs' => $this->tabs]);
         
     }
 
-
-     /**
-     * Responds to requests to GET /users
-     */
-    public function getIndexCoordinador()
-    {
-        $user = \Auth::user();
-        $CursosMaterias = CursosMaterias::where('id_profesor', '=', $user->id);
-        $MateriasCoordinador = CursosMaterias::where('id_profesor', '=', $user->id);
-        $cursos = Cursos::all();
-        $materias = Materias::all();
-
-        return view('Dashboard.ListarDocentes', 
-            ['CursosMaterias' => $CursosMaterias,
-            'MateriasCoordinador' => $MateriasCoordinador,
-            'cursos' => $cursos,
-            'materias' => $materias,
-            'tabs' => $this->tabs]);
-        
-    }
 
     /**
      * Responds to requests to GET /users/show/1

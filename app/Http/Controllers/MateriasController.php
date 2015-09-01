@@ -26,7 +26,6 @@ class MateriasController extends Controller
        
 
         $materias = Materias::with('Users')->get();
-        dd($materias);
 
         return view('Materias.Listar', ['materias' => $materias,'tabs' => $this->tabs]);
     }
