@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\TipoUser;
 use Illuminate\Contracts\Auth\Guard;
 
 class RedirectIfAuthenticated
@@ -34,8 +35,12 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check()) {
-            return redirect('home');
+        if ($this->auth->check()) {    
+
+            $user = \Auth::user();
+            $tipo_user = TipoUser::find($user->id);
+            return redirect($tipo_user->pantalla);
+
         }
 
         return $next($request);

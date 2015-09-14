@@ -35,4 +35,9 @@ class Notas extends Model
         return $this->hasOne('App\User','id','id_profesor');
     }
 
+    public function CursoMateria()
+    {
+        return $this->hasOne('App\CursosMaterias','id','id_cursomateria');
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\TipoUser;
 use Validator;
 use Session;
 use App\Http\Controllers\Controller;
@@ -82,14 +83,23 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
           );
+
+      $remember = false;
+
+      if($request->input('remember') != null){
+        $remember = true;
+      }
+
       // doing login.
       if (\Auth::validate($userdata)) {
-        if (\Auth::attempt($userdata)) {
-          $user = \Auth::user();
-          if($user->enrolado == 0){
-            return redirect('auth/change-password');
-          }
-          return redirect('home');
+          if (\Auth::attempt($userdata,$remember)) {
+            $user = \Auth::user();
+            if($user->enrolado == 0){
+              return redirect('auth/change-password');
+            }
+
+            $tipo_user = TipoUser::find($user->id);
+            return redirect($tipo_user->pantalla);
         }
       } 
       else {

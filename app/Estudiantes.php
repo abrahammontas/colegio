@@ -15,9 +15,9 @@ class Estudiantes extends Model
     protected $guarded = array('id');
     protected $fillable = array('matricula', 'nombre','id_curso');
 
-    public function Cursos()
+    public function Curso()
     {
-        return $this->hasOne('App\Cursos');
+        return $this->hasOne('App\Cursos', 'id', 'id_curso');
     }
 
     public function Notas()

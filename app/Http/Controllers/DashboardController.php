@@ -13,12 +13,31 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
+
+    //  public function __construct($auth)
+    // {
+    //     $this->auth = $auth;
+    // }
+
+
+    public function getDirector()
+    {
+        $user = \Auth::user();
+        
+    
+    }
+
+
     /**
      * Responds to requests to GET /docente
      */
     public function getDocente()
     {
         $user = \Auth::user();
+        
+        //TODO: Verificar que sea Docente, sino 404 
+        
+
         $CursosMateriasProf = CursosMaterias::with('Curso', 'Materia', 'Coordinador', 'Profesor')
                                 ->where('id_profesor', '=', $user->id)
                                 ->where('id_coordinador', '!=', $user->id)
@@ -32,6 +51,15 @@ class DashboardController extends Controller
             ['CursosMateriasProf' => $CursosMateriasProf,
             'CursosMateriasCoo' => $CursosMateriasCoo,
             'tabs' => $this->tabs]);
+        
+    }
+
+    public function getSecretaria()
+    {
+        $user = \Auth::user();
+        
+        //TODO: Verificar que sea Secretaria, sino 404
+        //      Logica de presentar view con todas las opciones de Secretaria
         
     }
 

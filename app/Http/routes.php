@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::controller('home', 'DashboardController');
 
+	Route::controller('imprimir', 'ImprimirController');
+
 	Route::controller('notas', 'NotasController');
 
 });
@@ -45,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 // GET route
 Route::get('/', array('middleware' => 'guest',
 	'uses' => 'Auth\AuthController@getLogin'));
+
 
 //POST route
 Route::post('login', 'Auth\AuthController@postLogin');
