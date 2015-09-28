@@ -18,8 +18,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::resource('docentes', 'DocentesController');
 
-	Route::resource('estudiantes', 'EstudiantesController');
-
 	Route::resource('tipouser', 'TipoUserController');
 
 	Route::resource('niveles', 'NivelesController');
@@ -35,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('logout', 'Auth\AuthController@getLogout');
 
 	Route::controller('auth', 'Auth\AuthController');
+
+	Route::controller('comentarios', 'ComentariosController');
 	
 	Route::controller('home', 'DashboardController');
 

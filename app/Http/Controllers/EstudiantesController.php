@@ -14,7 +14,7 @@ use Session;
 class EstudiantesController extends Controller
 {
 
-         public function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -23,8 +23,7 @@ class EstudiantesController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
+    public function index(){
 
          $estudiantes = Estudiantes::all();
          $cursos = Cursos::all();
@@ -33,14 +32,11 @@ class EstudiantesController extends Controller
             foreach($cursos as $n){
                 if($d->id_cursos == $n->id){
                     $d->curso = $n->descripcion;
+                    }
                 }
             }
-        }
         
         return view('Estudiantes.Listar', ['estudiantes' => $estudiantes,'tabs' => $this->tabs]);
-        //
-        //$estudiantes = Estudiantes::all();
-        //return view('Estudiantes.listar', ['estudiantes' => $estudiantes]);
     }
 
     /**
@@ -154,4 +150,6 @@ class EstudiantesController extends Controller
         return redirect('estudiantes')->with('mensaje', $mensaje)
                                    ->with('class', $class);
     }
+
+
 }

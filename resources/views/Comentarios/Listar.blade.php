@@ -16,7 +16,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($comentarios as $c)
+                @foreach($estudiante->comentarios as $c)
                 <tr>
                   <td>{{ $c->id }}</td>
                   <td>{{ $c->id_profesor }}</td>

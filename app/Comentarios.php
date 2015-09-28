@@ -11,5 +11,16 @@ class Comentarios extends Model
      *
      * @var string
      */
-    protected $table = 'comentarios';
+    protected $table = 'comentarios';    
+    protected $guarded = array('id');
+    protected $fillable = array('id_profesor','id_estudiante','comentario','id_profesor');
+
+    public function Estudiante()
+    {
+        return $this->hasOne('App\Estudiantes','id','id_estudiante');
+    }
+    public function Profesor()
+    {
+        return $this->hasOne('App\User','id','id_profesor');
+    }
 }
