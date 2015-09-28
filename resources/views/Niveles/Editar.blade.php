@@ -1,6 +1,7 @@
 @extends('Templates/TemplateResource')
 @extends('Templates/TemplateBarra')
 
+
 @section('content')
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div class="col-lg-4">
@@ -11,6 +12,7 @@
 			    {!! Form::text('descripcion', null, 
 			        array('class'=>'form-control', 
 			              'placeholder'=>'Profesor')) !!}
+
 			</div>
         		<button class="btn btn-primary btn-block" type="submit">Editar</button>
 		  {!! Form::close() !!}

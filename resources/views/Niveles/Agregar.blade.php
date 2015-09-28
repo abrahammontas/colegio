@@ -11,6 +11,7 @@
 			    {!! Form::text('descripcion', null, 
 			        array('class'=>'form-control', 
 			              'placeholder'=>'Profesor')) !!}
+
 			</div>
         		<button class="btn btn-primary btn-block" type="submit">Agregar</button>
 		  {!! Form::close() !!}
