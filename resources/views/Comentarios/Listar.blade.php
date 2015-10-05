@@ -4,7 +4,7 @@
 @section('content')
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="sub-header">Section title</h2>
+          <h2 class="sub-header">Comentarios de {{$estudiante->nombre}}</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -19,8 +19,8 @@
                 @foreach($estudiante->comentarios as $c)
                 <tr>
                   <td>{{ $c->id }}</td>
-                  <td>{{ $c->id_profesor }}</td>
-                  <td>{{ $c->id_estudiante }}</td>
+                  <td>{{ $c->Profesor->name }}</td>
+                  <td>{{ $c->Estudiante->nombre }}</td>
                   <td>{{ $c->comentario }}</td>
                 </tr>
                 @endforeach

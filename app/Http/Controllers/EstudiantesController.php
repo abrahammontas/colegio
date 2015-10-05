@@ -151,5 +151,4 @@ class EstudiantesController extends Controller
                                    ->with('class', $class);
     }
 
-
 }
