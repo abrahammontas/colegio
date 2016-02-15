@@ -11,21 +11,14 @@ class Role extends Model
      *
      * @var array
      */
-    protected $guarded = array('id');
+    protected $guarded = array['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array('name');
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+    protected $fillable = array['name'];
 
     public function usersOrganisations()
     {

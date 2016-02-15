@@ -13,21 +13,14 @@ class User extends Model
      *
      * @var array
      */
-    protected $guarded = array('id');
+    protected $guarded = array['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array('name', 'others');
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+    protected $fillable = array['name', 'others'];
 
     public function organisationsRoles()
     {

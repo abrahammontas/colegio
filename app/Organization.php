@@ -20,13 +20,6 @@ class Organization extends Model
      */
     protected $fillable = array['name', 'others'];
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
     public function userRoles()
     {
         return $this->hasMany('App\UsersOrganisationsRoles','organisation_id','id');
