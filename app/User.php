@@ -2,34 +2,52 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\UsersOrganisationsRoles;
+use App\OrganisationsClients;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
-{
-    use Authenticatable, CanResetPassword;
-
+class User extends Model
+{       
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
-     * The attributes that are mass assignable.
+     * The primary Id.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'id_tipo', 'enrolado'];
+    protected $guarded = array('id');
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * Columns that can be added or edited
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = array('name', 'others');
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    public function organisationsRoles()
+    {
+        return $this->hasMany('App\UsersOrganisationsRoles','user_id','id');
+    }    
+
+    public function scopeAllOrganisations()
+    {
+        $userData = UsersOrganisationsRoles::with('organisations')
+                                           ->where('role_id', '=', 1)
+                                           ->where('user_id', '=', 1)
+                                           ->get();
+        return $userData;
+    }
+
+    public function scopeAllOrganisationsClients()
+    {
+        $userData = OrganisationsClients::with('organisations')
+                                        ->with('clients')
+                                        ->get();
+        return $userData;
+    }
 }
