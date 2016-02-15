@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Users;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        $data = Users::allOrganisations();
+        dd($data);
     }
 
     /**

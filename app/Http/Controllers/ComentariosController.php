@@ -37,7 +37,7 @@ class ComentariosController extends Controller
         return view('Comentarios.Agregar', ['comentario' => $comentario,'tabs' => $this->tabs]);
     }
 
-    public function postAgregar()
+    public function postAgregar(ComentariosRules $request)
     {
 
     }

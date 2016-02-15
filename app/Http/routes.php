@@ -11,7 +11,6 @@
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
 	Route::resource('inicio', 'HomeController');
 
 	Route::resource('estudiantes', 'EstudiantesController');
@@ -42,7 +41,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::controller('notas', 'NotasController');
 
-});
 
 // GET route
 Route::get('/', array('middleware' => 'guest',
