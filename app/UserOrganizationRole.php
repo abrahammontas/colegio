@@ -22,11 +22,11 @@ class UserOrganizationRole extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Users');
+        return $this->belongsTo('App\User');
     }
 
-    public function organisations()
+    public function organization()
     {
-        return $this->belongsTo('App\Organisations');
+        return $this->belongsTo('App\Organization');
     }
 }

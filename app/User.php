@@ -22,14 +22,14 @@ class User extends Model
      */
     protected $fillable = ['name', 'others'];
 
-    public function organisationsRoles()
+    public function organizationRole()
     {
-        return $this->hasMany('App\UsersOrganisationsRoles');
+        return $this->hasMany('App\UserOrganizationRole');
     }    
 
     public function scopeAllOrganisations()
     {
-        $userData = UsersOrganisationsRoles::with('organisations')
+        $userData = UsersOrganisationsRoles::with('organization')
                                            ->where('role_id', '=', 1)
                                            ->where('user_id', '=', 1)
                                            ->get();
@@ -38,8 +38,8 @@ class User extends Model
 
     public function scopeAllOrganisationsClients()
     {
-        $userData = OrganisationsClients::with('organisations')
-                                        ->with('clients')
+        $userData = OrganisationsClients::with('organization')
+                                        ->with('client')
                                         ->get();
         return $userData;
     }

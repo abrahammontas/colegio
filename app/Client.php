@@ -20,13 +20,8 @@ class Client extends Model
      */
     protected $fillable = ['name', 'others', 'creator_user_id'];
 
-    public function organisations()
+    public function organization()
     {
-        return $this->hasMany('App\OrganisationsClients');
+        return $this->hasMany('App\OrganizationClient');
     }  
-
-    public function organisations()
-    {
-        return $this->hasMany('App\OrganisationsClients');
-    } 
 }

@@ -20,13 +20,13 @@ class OrganizationClient extends Model
      */
     protected $fillable = ['organisation_id', 'client_id'];
 
-    public function organisations()
+    public function organization()
     {
-        return $this->belongsTo('App\Organisations');
+        return $this->belongsTo('App\Organization');
     }
 
-    public function clients()
+    public function client()
     {
-        return $this->belongsTo('App\Clients');
+        return $this->belongsTo('App\Client');
     }
 }

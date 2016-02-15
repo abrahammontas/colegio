@@ -20,13 +20,13 @@ class Organization extends Model
      */
     protected $fillable = ['name', 'others'];
 
-    public function userRoles()
+    public function userRole()
     {
-        return $this->hasMany('App\UsersOrganisationsRoles');
+        return $this->hasMany('App\UserOrganizationRole');
     } 
 
-    public function clients()
+    public function client()
     {
-        return $this->hasMany('App\OrganisationClients');
+        return $this->hasMany('App\OrganizationCliens');
     }  
 }

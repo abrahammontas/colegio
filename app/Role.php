@@ -20,8 +20,8 @@ class Role extends Model
      */
     protected $fillable = ['name'];
 
-    public function usersOrganisations()
+    public function userOrganization()
     {
-        return $this->hasMany('App\UsersOrganisationsRoles');
+        return $this->hasMany('App\UserOrganizationRole');
     }  
 }
