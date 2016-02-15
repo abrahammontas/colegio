@@ -11,22 +11,22 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $guarded = array['id'];
+    protected $guarded = ['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array['name', 'others'];
+    protected $fillable = ['name', 'others'];
 
     public function userRoles()
     {
-        return $this->hasMany('App\UsersOrganisationsRoles','organisation_id','id');
+        return $this->hasMany('App\UsersOrganisationsRoles');
     } 
 
     public function clients()
     {
-        return $this->hasMany('App\OrganisationClients','organisation_id','id');
+        return $this->hasMany('App\OrganisationClients');
     }  
 }

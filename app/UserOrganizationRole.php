@@ -11,22 +11,22 @@ class UserOrganizationRole extends Model
      *
      * @var array
      */
-    protected $guarded = array['id'];
+    protected $guarded = ['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array['user_id', 'organisation_id', 'role_id'];
+    protected $fillable = ['user_id', 'organisation_id', 'role_id'];
 
     public function user()
     {
-        return $this->belongsTo('App\Users', 'user_id', 'id');
+        return $this->belongsTo('App\Users');
     }
 
     public function organisations()
     {
-        return $this->belongsTo('App\Organisations', 'organisation_id', 'id');
+        return $this->belongsTo('App\Organisations');
     }
 }

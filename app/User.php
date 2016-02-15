@@ -13,18 +13,18 @@ class User extends Model
      *
      * @var array
      */
-    protected $guarded = array['id'];
+    protected $guarded = ['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array['name', 'others'];
+    protected $fillable = ['name', 'others'];
 
     public function organisationsRoles()
     {
-        return $this->hasMany('App\UsersOrganisationsRoles','user_id','id');
+        return $this->hasMany('App\UsersOrganisationsRoles');
     }    
 
     public function scopeAllOrganisations()

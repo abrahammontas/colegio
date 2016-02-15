@@ -11,22 +11,22 @@ class OrganizationClient extends Model
      *
      * @var array
      */
-    protected $guarded = array['id'];
+    protected $guarded = ['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array['organisation_id', 'client_id'];
+    protected $fillable = ['organisation_id', 'client_id'];
 
     public function organisations()
     {
-        return $this->belongsTo('App\Organisations', 'organisation_id', 'id');
+        return $this->belongsTo('App\Organisations');
     }
 
     public function clients()
     {
-        return $this->belongsTo('App\Clients', 'client_id', 'id');
+        return $this->belongsTo('App\Clients');
     }
 }

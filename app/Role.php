@@ -11,17 +11,17 @@ class Role extends Model
      *
      * @var array
      */
-    protected $guarded = array['id'];
+    protected $guarded = ['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array['name'];
+    protected $fillable = ['name'];
 
     public function usersOrganisations()
     {
-        return $this->hasMany('App\UsersOrganisationsRoles','role_id','id');
+        return $this->hasMany('App\UsersOrganisationsRoles');
     }  
 }

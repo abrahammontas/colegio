@@ -11,22 +11,22 @@ class Client extends Model
      *
      * @var array
      */
-    protected $guarded = array['id'];
+    protected $guarded = ['id'];
 
     /**
      * Columns that can be added or edited
      *
      * @var array
      */
-    protected $fillable = array['name', 'others', 'creator_user_id'];
+    protected $fillable = ['name', 'others', 'creator_user_id'];
 
     public function organisations()
     {
-        return $this->hasMany('App\OrganisationsClients','client_id','id');
+        return $this->hasMany('App\OrganisationsClients');
     }  
 
     public function organisations()
     {
-        return $this->hasMany('App\OrganisationsClients','client_id','id');
+        return $this->hasMany('App\OrganisationsClients');
     } 
 }
