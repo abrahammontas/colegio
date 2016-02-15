@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Users::allOrganisations();
+        $data = Users::allOrganisationsClients();
         dd($data);
     }
 

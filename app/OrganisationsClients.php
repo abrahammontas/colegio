@@ -33,4 +33,14 @@ class OrganisationsClients extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public function organisations()
+    {
+        return $this->belongsTo('App\Organisations', 'organisation_id', 'id');
+    }
+
+    public function clients()
+    {
+        return $this->belongsTo('App\Clients', 'client_id', 'id');
+    }
 }

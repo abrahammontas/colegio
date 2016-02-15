@@ -37,7 +37,7 @@ class Organisations extends Model
 
     public function userRoles()
     {
-        return $this->hasMany('App\UserOrganisationsRoles','organisation_id','id');
+        return $this->hasMany('App\UsersOrganisationsRoles','organisation_id','id');
     } 
 
     public function clients()

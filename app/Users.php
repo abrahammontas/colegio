@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\UsersOrganisationsRoles;
+use App\OrganisationsClients;
 
 class Users extends Model
 {       
@@ -40,15 +42,20 @@ class Users extends Model
         return $this->hasMany('App\UsersOrganisationsRoles','user_id','id');
     }    
 
-    static function scopeAllOrganisations()
+    public function scopeAllOrganisations()
     {
-        $userData = Users::find(1)->organisationsRoles()->organisations()->get();
-        return $userData->organisations();
+        $userData = UsersOrganisationsRoles::with('organisations')
+                                           ->where('role_id', '=', 1)
+                                           ->where('user_id', '=', 1)
+                                           ->get();
+        return $userData;
     }
 
-    static function scopeAllOrganisationsClients()
+    public function scopeAllOrganisationsClients()
     {
-        $userData = Users::find(1)->organisationsRoles()->organisations()->clients()->get();
-        return $userData->organisations();
+        $userData = OrganisationsClients::with('organisations')
+                                        ->with('clients')
+                                        ->get();
+        return $userData;
     }
 }

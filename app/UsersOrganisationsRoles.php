@@ -36,11 +36,11 @@ class UsersOrganisationsRoles extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Users');
+        return $this->belongsTo('App\Users', 'user_id', 'id');
     }
 
     public function organisations()
     {
-        return $this->belongsTo('App\Organisations');
+        return $this->belongsTo('App\Organisations', 'organisation_id', 'id');
     }
 }
